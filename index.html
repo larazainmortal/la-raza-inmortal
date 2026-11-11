@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La Raza Inmortal: noticias, actualidad, historia y pasión por Colón de Santa Fe.">
+  <title>La Raza Inmortal | Noticias de Colón</title>
+  <style>
+    :root{--red:#d71920;--dark:#111;--ink:#191919;--muted:#6b7280;--paper:#f4f4f4;--white:#fff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink)}
+    a{color:inherit;text-decoration:none}
+    .topline{height:7px;background:linear-gradient(90deg,var(--red) 0 50%,#111 50%)}
+    header{background:#111;color:#fff}
+    .wrap{width:min(1120px,92%);margin:auto}
+    .brandbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0}
+    .brand{display:flex;align-items:center;gap:13px}
+    .crest{width:54px;height:62px;background:linear-gradient(90deg,var(--red) 0 50%,#111 50%);border:3px solid #fff;clip-path:polygon(0 0,100% 0,100% 72%,50% 100%,0 72%);display:grid;place-items:center;font-weight:900;font-size:18px;text-shadow:0 1px 3px #000}
+    .brand h1{font-size:clamp(22px,4vw,34px);line-height:.95;margin:0;font-weight:900;letter-spacing:-1px}
+    .brand h1 span{color:var(--red)}
+    .brand small{display:block;color:#bbb;letter-spacing:2px;font-size:10px;margin-top:7px}
+    .tagline{font-size:12px;color:#ccc;text-align:right;text-transform:uppercase;letter-spacing:1.5px}
+    nav{border-top:1px solid #333;background:#191919}
+    nav .wrap{display:flex;gap:0;overflow-x:auto}
+    nav a{padding:15px 17px;color:#eee;font-size:12px;font-weight:800;text-transform:uppercase;white-space:nowrap;border-bottom:3px solid transparent}
+    nav a:hover,nav a.active{border-color:var(--red);background:#242424}
+    .hero{min-height:370px;display:flex;align-items:end;color:white;background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.25)),linear-gradient(135deg,#3a080b,#171717 55%,#4a090d);position:relative;overflow:hidden}
+    .hero:after{content:"COLÓN";position:absolute;right:-15px;top:25px;font-size:clamp(90px,19vw,230px);font-weight:900;color:rgba(255,255,255,.06);transform:rotate(-8deg)}
+    .hero-content{position:relative;z-index:1;padding:55px 0;max-width:690px}
+    .eyebrow{display:inline-block;background:var(--red);padding:7px 10px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+    .hero h2{font-size:clamp(34px,6vw,58px);line-height:.98;margin:18px 0 12px;text-transform:uppercase;letter-spacing:-1.5px}
+    .hero p{color:#ddd;line-height:1.6;max-width:570px;margin:0 0 20px}
+    .btn{display:inline-block;background:var(--red);color:#fff;padding:12px 17px;font-size:12px;font-weight:900;text-transform:uppercase}
+    main{padding:38px 0 55px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #191919;margin-bottom:20px}
+    .section-head h2{font-size:22px;text-transform:uppercase;margin:0 0 10px}
+    .section-head h2:before{content:"";display:inline-block;width:7px;height:20px;background:var(--red);margin-right:10px;vertical-align:-3px}
+    .section-head span{font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:#fff;box-shadow:0 3px 14px rgba(0,0,0,.06)}
+    .thumb{height:170px;background:linear-gradient(135deg,#28070a,#d71920 52%,#171717);position:relative;overflow:hidden}
+    .thumb:after{content:"COLÓN";position:absolute;right:8px;bottom:-14px;color:rgba(255,255,255,.16);font-weight:900;font-size:65px}
+    .thumb.alt{background:linear-gradient(135deg,#111,#4a4a4a,#d71920)}
+    .thumb.history{background:linear-gradient(135deg,#2a1b12,#9b6b3c,#171717)}
+    .card-body{padding:18px}
+    .category{font-size:10px;color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:1px}
+    .card h3{font-size:19px;line-height:1.15;margin:9px 0}
+    .card p{font-size:13px;line-height:1.5;color:#666;margin:0 0 14px}
+    .meta{font-size:10px;color:#999;text-transform:uppercase;font-weight:700}
+    .lower{display:grid;grid-template-columns:2fr 1fr;gap:28px;margin-top:42px}
+    .list-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #ddd}
+    .mini-thumb{flex:0 0 92px;height:70px;background:linear-gradient(135deg,#111,#d71920)}
+    .list-item h3{font-size:15px;margin:2px 0 6px}
+    .list-item p{font-size:12px;color:#777;margin:0;line-height:1.4}
+    .sidebar{background:#191919;color:#fff;padding:22px;height:max-content}
+    .sidebar h3{margin:0 0 14px;text-transform:uppercase;font-size:18px;border-bottom:2px solid var(--red);padding-bottom:12px}
+    .sidebar p{font-size:13px;line-height:1.6;color:#ccc}
+    .sidebar strong{color:#fff}
+    footer{background:#111;color:#aaa;padding:28px 0}
+    footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px}
+    footer strong{color:#fff}
+    @media(max-width:760px){.tagline{display:none}.grid{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.hero{min-height:340px}.thumb{height:190px}}
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <header>
+    <div class="wrap brandbar">
+      <a class="brand" href="#">
+        <div class="crest">C</div>
+        <div><h1>LA RAZA <span>INMORTAL</span></h1><small>PERIODISMO SABALERO</small></div>
+      </a>
+      <div class="tagline">Una pasión que no conoce de tiempos<br>Club Atlético Colón · Santa Fe</div>
+    </div>
+    <nav><div class="wrap">
+      <a class="active" href="#inicio">Inicio</a><a href="#actualidad">Actualidad</a><a href="#futbol">Fútbol</a><a href="#inferiores">Inferiores</a><a href="#historia">Historia</a><a href="#opinion">Opinión</a>
+    </div></nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="wrap hero-content">
+      <span class="eyebrow">Toda la actualidad sabalera</span>
+      <h2>El sentimiento<br>no se negocia.</h2>
+      <p>Noticias, análisis, entrevistas e historias del Club Atlético Colón. Un espacio para vivir y contar la pasión rojinegra.</p>
+      <a class="btn" href="#actualidad">Explorar noticias</a>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section id="actualidad">
+      <div class="section-head"><h2>Noticias destacadas</h2><span>La actualidad de Colón</span></div>
+      <div class="grid">
+        <article class="card" id="futbol"><div class="thumb"></div><div class="card-body"><span class="category">Primera división</span><h3>Colón: toda la información del primer equipo</h3><p>En este espacio vas a encontrar novedades, entrenamientos, declaraciones y la preparación del plantel.</p><div class="meta">Actualidad · La Raza Inmortal</div></div></article>
+        <article class="card" id="inferiores"><div class="thumb alt"></div><div class="card-body"><span class="category">Inferiores y reserva</span><h3>El futuro sabalero también tiene su lugar</h3><p>Seguimiento de las divisiones formativas, la reserva y los jóvenes que representan al club.</p><div class="meta">Formativas · La Raza Inmortal</div></div></article>
+        <article class="card" id="historia"><div class="thumb history"></div><div class="card-body"><span class="category">Historia</span><h3>Las páginas que construyeron la identidad rojinegra</h3><p>Repasamos partidos, protagonistas y momentos que forman parte de la historia de Colón.</p><div class="meta">Memoria sabalera · La Raza Inmortal</div></div></article>
+      </div>
+    </section>
+
+    <div class="lower">
+      <section id="opinion">
+        <div class="section-head"><h2>Más información</h2></div>
+        <div class="list-item"><div class="mini-thumb"></div><div><span class="category">Análisis</span><h3>La mirada del hincha: debatir también es parte del fútbol</h3><p>Columnas y opiniones sobre el presente y el futuro del Sabalero.</p></div></div>
+        <div class="list-item"><div class="mini-thumb"></div><div><span class="category">Entrevistas</span><h3>Las voces protagonistas</h3><p>Historias y testimonios de jugadores, entrenadores e hinchas.</p></div></div>
+        <div class="list-item"><div class="mini-thumb"></div><div><span class="category">Multimedia</span><h3>El mundo Colón en imágenes y videos</h3><p>Producciones audiovisuales, coberturas y contenido especial.</p></div></div>
+      </section>
+      <aside class="sidebar"><h3>La pasión nos une</h3><p><strong>LA RAZA INMORTAL</strong> es un proyecto periodístico dedicado al Club Atlético Colón.</p><p>Este sitio busca informar, contar historias y darle espacio a todas las voces de la comunidad sabalera.</p><p><strong>Rojo y negro. Siempre.</strong></p></aside>
+    </div>
+  </main>
+
+  <footer><div class="wrap"><div><strong>LA RAZA INMORTAL</strong><br>Periodismo sabalero</div><div>Proyecto independiente · Santa Fe, Argentina</div><div>© 2026 La Raza Inmortal</div></div></footer>
+</body>
+</html>
