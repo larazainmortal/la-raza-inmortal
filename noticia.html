@@ -5,18 +5,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noticia | La Raza Inmortal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #f5f5f5;
+      color: #222;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    h1 {
+      font-size: 32px;
+    }
+    .categoria, .fecha {
+      color: #777;
+      margin-bottom: 12px;
+    }
+    .cuerpo {
+      font-size: 18px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+  </style>
 </head>
 <body>
 
-  <h1>Prueba desde cero</h1>
+  <a href="index.html">← Volver a Actualidad Sabalera</a>
 
-  <img src="https://placehold.co/800x450" alt="Imagen de la noticia" width="100%">
+  <div id="contenido">
+    Cargando noticia...
+  </div>
 
-  <p>Este es el comienzo de nuestra noticia de prueba.</p>
+  <script>
+    const noticia = JSON.parse(
+      localStorage.getItem("noticiaSeleccionada") || "null"
+    );
 
-  <p>Acá aparecerá el desarrollo completo de la información sobre Colón de Santa Fe.</p>
+    const contenido = document.getElementById("contenido");
 
-  <a href="index.html">Volver a Actualidad Sabalera</a>
+    if (noticia) {
+      contenido.innerHTML = `
+        <p class="categoria"></p>
+        <h1></h1>
+        <p class="fecha"></p>
+        <img>
+        <div class="cuerpo"></div>
+      `;
+
+      contenido.querySelector(".categoria").textContent = noticia.categoria || "";
+      contenido.querySelector("h1").textContent = noticia.titulo || "";
+      contenido.querySelector(".fecha").textContent = noticia.fecha || "";
+
+      const imagen = contenido.querySelector("img");
+      imagen.src = noticia.imagen || "";
+      imagen.alt = noticia.titulo || "";
+
+      contenido.querySelector(".cuerpo").textContent = noticia.cuerpo || "";
+    } else {
+      contenido.textContent = "No se encontró la noticia.";
+    }
+  </script>
 
 </body>
 </html>
