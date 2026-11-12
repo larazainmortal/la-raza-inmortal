@@ -60,6 +60,80 @@
     footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px}
     footer strong{color:#fff}
     @media(max-width:760px){.tagline{display:none}.grid{grid-template-columns:1fr}.lower{grid-template-columns:1fr}.hero{min-height:340px}.thumb{height:190px}}
+ /* NUEVO DISEÑO DE NOTICIAS */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card {
+  background: #171717;
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #d71920;
+}
+
+.thumb {
+  height: 210px;
+  background: linear-gradient(135deg, #292929, #8b1018);
+}
+
+.thumb.alt {
+  background: linear-gradient(135deg, #181818, #555);
+}
+
+.thumb.history {
+  background: linear-gradient(135deg, #8b1018, #181818);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.category {
+  color: #ed3038;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card h3 {
+  color: #fff;
+  font-size: 19px;
+  line-height: 1.4;
+  margin: 12px 0;
+}
+
+.card p {
+  color: #bdbdbd;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.meta {
+  color: #888;
+  font-size: 12px;
+  margin-top: 18px;
+}
+
+@media (max-width: 800px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .thumb {
+    height: 190px;
+  }
+}
   </style>
 </head>
 <body>
