@@ -234,6 +234,7 @@
 
   <footer><div class="wrap"><div><strong>LA RAZA INMORTAL</strong><br>Periodismo sabalero</div><div>Proyecto independiente · Santa Fe, Argentina</div><div>© 2026 La Raza Inmortal</div></div></footer>
 <script>
+
 async function cargarNoticias() {
   const contenedor = document.getElementById("noticias-dinamicas");
 
@@ -242,7 +243,7 @@ async function cargarNoticias() {
       "https://api.github.com/repos/larazainmortal/la-raza-inmortal/contents/content/noticias"
     );
 
-    if (!respuesta.ok) throw new Error("No se pudieron cargar las noticias");
+    if (!respuesta.ok) throw new Error("Error al cargar noticias");
 
     const archivos = await respuesta.json();
     contenedor.innerHTML = "";
@@ -262,10 +263,11 @@ async function cargarNoticias() {
 
       const articulo = document.createElement("article");
       articulo.className = "card";
+      articulo.style.cursor = "pointer";
 
       const imagen = document.createElement("img");
-      imagen.src = noticia.imagen;
-      imagen.alt = noticia.titulo;
+      imagen.src = noticia.imagen || "";
+      imagen.alt = noticia.titulo || "";
       imagen.style = "width:100%; height:180px; object-fit:cover;";
 
       const miniatura = document.createElement("div");
@@ -291,13 +293,19 @@ async function cargarNoticias() {
 
       cuerpo.append(categoria, titulo, texto, fecha);
       articulo.append(miniatura, cuerpo);
+
+      articulo.addEventListener("click", () => {
+        localStorage.setItem("noticiaSeleccionada", JSON.stringify(noticia));
+        window.location.href = "noticia.html";
+      });
+
       contenedor.appendChild(articulo);
     }
   } catch (error) {
     contenedor.textContent = "No se pudieron cargar las noticias.";
     console.error(error);
   }
-}
+ }
 
 cargarNoticias();
 </script>
