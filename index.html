@@ -134,29 +134,70 @@
     height: 190px;
   }
 }
+ .hero-header {
+  width: 100%;
+  min-height: 420px;
+  background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.55)), url("imagen de WhatsApp 2026-11-12 a las 12.08.26 AM.JPEG");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.hero-overlay {
+  background: rgba(0,0,0,0.72);
+  padding: 35px 55px;
+  text-align: center;
+  max-width: 90%;
+}
+
+.hero-overlay h1 {
+  color: white;
+  font-size: clamp(30px, 6vw, 65px);
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin: 0;
+}
+
+.hero-overlay h1 span {
+  color: #e21b2d;
+}
+
+@media (max-width: 600px) {
+  .hero-header {
+    min-height: 280px;
+  }
+
+  .hero-overlay {
+    padding: 25px 20px;
+  }
+}
   </style>
 </head>
 <body>
   <div class="topline"></div>
   <header>
-    <div class="wrap brandbar">
-      <a class="brand" href="#">
-        <div class="crest">C</div>
-        <div><h1>LA RAZA <span>INMORTAL</span></h1><small>PERIODISMO SABALERO</small></div>
-      </a>
-      <div class="tagline">Una pasión que no conoce de tiempos<br>Club Atlético Colón · Santa Fe</div>
-    </div>
-   <nav><div class="wrap">
-  <a class="active" href="#inicio">Inicio</a>
-  <a href="#actualidad">Actualidad</a>
-  <a href="#futbol">Fútbol</a>
-  <a href="#inferiores">Inferiores y reserva</a>
-  <a href="#femenino">Fútbol femenino</a>
-  <a href="#basquet">Básquet</a>
-  <a href="#polideportivo">Polideportivo</a>
-  <a href="#historia">Historia</a>
-  <a href="#opinion">Opinión</a>
-</div></nav>
+    <div class="hero-header">
+  <div class="hero-overlay">
+    <h1>LA RAZA <span>INMORTAL</span></h1>
+  </div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <a class="active" href="#inicio">Inicio</a>
+    <a href="#actualidad">Actualidad</a>
+    <a href="#futbol">Fútbol</a>
+    <a href="#inferiores">Inferiores y reserva</a>
+    <a href="#femenino">Fútbol femenino</a>
+    <a href="#basquet">Básquet</a>
+    <a href="#polideportivo">Polideportivo</a>
+    <a href="#historia">Historia</a>
+    <a href="#opinion">Opinión</a>
+  </div>
+</nav>
   </header>
 
   <section class="hero" id="inicio">
