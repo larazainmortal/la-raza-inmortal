@@ -263,5 +263,73 @@
   </main>
 
   <footer><div class="wrap"><div><strong>LA RAZA INMORTAL</strong><br>Periodismo sabalero</div><div>Proyecto independiente · Santa Fe, Argentina</div><div>© 2026 La Raza Inmortal</div></div></footer>
+<script>
+async function cargarNoticias() {
+  const contenedor = document.getElementById("noticias-dinamicas");
+
+  try {
+    const respuesta = await fetch(
+      "https://api.github.com/repos/larazainmortal/la-raza-inmortal/contents/content/noticias"
+    );
+
+    if (!respuesta.ok) throw new Error("No se pudieron cargar las noticias");
+
+    const archivos = await respuesta.json();
+    contenedor.innerHTML = "";
+
+    for (const archivo of archivos) {
+      if (!archivo.name.endsWith(".md")) continue;
+
+      const respuestaArchivo = await fetch(archivo.download_url);
+      const contenido = await respuestaArchivo.text();
+
+      const inicio = contenido.indexOf("{");
+      const fin = contenido.lastIndexOf("}");
+
+      if (inicio === -1 || fin === -1) continue;
+
+      const noticia = JSON.parse(contenido.slice(inicio, fin + 1));
+
+      const articulo = document.createElement("article");
+      articulo.className = "card";
+
+      const imagen = document.createElement("img");
+      imagen.src = noticia.imagen;
+      imagen.alt = noticia.titulo;
+      imagen.style = "width:100%; height:180px; object-fit:cover;";
+
+      const miniatura = document.createElement("div");
+      miniatura.className = "thumb";
+      miniatura.appendChild(imagen);
+
+      const cuerpo = document.createElement("div");
+      cuerpo.className = "card-body";
+
+      const categoria = document.createElement("span");
+      categoria.className = "category";
+      categoria.textContent = noticia.categoria || "";
+
+      const titulo = document.createElement("h3");
+      titulo.textContent = noticia.titulo || "";
+
+      const texto = document.createElement("p");
+      texto.textContent = noticia.cuerpo || "";
+
+      const fecha = document.createElement("div");
+      fecha.className = "meta";
+      fecha.textContent = noticia.fecha || "";
+
+      cuerpo.append(categoria, titulo, texto, fecha);
+      articulo.append(miniatura, cuerpo);
+      contenedor.appendChild(articulo);
+    }
+  } catch (error) {
+    contenedor.textContent = "No se pudieron cargar las noticias.";
+    console.error(error);
+  }
+}
+
+cargarNoticias();
+</script>
 </body>
 </html>
