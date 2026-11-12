@@ -1,0 +1,26 @@
+media:
+  input: media
+  output: /media
+
+content:
+  - name: noticias
+    label: Noticias
+    type: collection
+    path: content/noticias
+    format: json
+    fields:
+      - name: titulo
+        label: Título
+        type: string
+      - name: categoria
+        label: Categoría
+        type: string
+      - name: imagen
+        label: Fotografía
+        type: image
+      - name: fecha
+        label: Fecha
+        type: date
+      - name: cuerpo
+        label: Noticia
+        type: text
