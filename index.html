@@ -232,10 +232,87 @@
   </main>
 
   <footer><div class="wrap"><div><strong>LA RAZA INMORTAL</strong><br>Periodismo sabalero</div><div>Proyecto independiente · Santa Fe, Argentina</div><div>© 2026 La Raza Inmortal</div></div></footer>
-<script>
 
+<script>
 async function cargarNoticias() {
-  const contenedor = document.getElementById("noticias-dinamicas");
+  const actualidad = document.getElementById("noticias-dinamicas");
+
+  const secciones = [
+    { id: "futbol", titulo: "Fútbol profesional", subtitulo: "Toda la información del primer equipo" },
+    { id: "inferiores", titulo: "Inferiores", subtitulo: "Las novedades de las divisiones inferiores" },
+    { id: "historia", titulo: "Historia", subtitulo: "La historia y la identidad sabalera" },
+    { id: "disciplinas", titulo: "Otras disciplinas", subtitulo: "Toda la actividad deportiva de Colón" }
+  ];
+
+  const contenedores = {};
+
+  let referencia = actualidad.closest("section");
+
+  secciones.forEach(seccion => {
+    const bloque = document.createElement("section");
+    bloque.id = seccion.id;
+    bloque.innerHTML = `
+      <div class="section-head">
+        <h2>${seccion.titulo}</h2>
+        <span>${seccion.subtitulo}</span>
+      </div>
+      <div class="grid" id="noticias-${seccion.id}"></div>
+    `;
+
+    referencia.insertAdjacentElement("afterend", bloque);
+    referencia = bloque;
+    contenedores[seccion.id] = bloque.querySelector(".grid");
+  });
+
+  function normalizar(texto) {
+    return (texto || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
+  }
+
+  function crearTarjeta(noticia) {
+    const articulo = document.createElement("article");
+    articulo.className = "card";
+    articulo.style.cursor = "pointer";
+
+    const imagen = document.createElement("img");
+    imagen.src = noticia.imagen || "";
+    imagen.alt = noticia.titulo || "";
+    imagen.style = "width:100%; height:180px; object-fit:cover;";
+
+    const miniatura = document.createElement("div");
+    miniatura.className = "thumb";
+    miniatura.appendChild(imagen);
+
+    const cuerpo = document.createElement("div");
+    cuerpo.className = "card-body";
+
+    const categoria = document.createElement("span");
+    categoria.className = "category";
+    categoria.textContent = noticia.categoria || "";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = noticia.titulo || "";
+
+    const texto = document.createElement("p");
+    texto.textContent = noticia.cuerpo || "";
+
+    const fecha = document.createElement("div");
+    fecha.className = "meta";
+    fecha.textContent = noticia.fecha || "";
+
+    cuerpo.append(categoria, titulo, texto, fecha);
+    articulo.append(miniatura, cuerpo);
+
+    articulo.addEventListener("click", () => {
+      localStorage.setItem("noticiaSeleccionada", JSON.stringify(noticia));
+      window.location.href = "noticia.html";
+    });
+
+    return articulo;
+  }
 
   try {
     const respuesta = await fetch(
@@ -245,7 +322,7 @@ async function cargarNoticias() {
     if (!respuesta.ok) throw new Error("Error al cargar noticias");
 
     const archivos = await respuesta.json();
-    contenedor.innerHTML = "";
+    const noticias = [];
 
     for (const archivo of archivos) {
       if (!archivo.name.endsWith(".md")) continue;
@@ -259,54 +336,42 @@ async function cargarNoticias() {
       if (inicio === -1 || fin === -1) continue;
 
       const noticia = JSON.parse(contenido.slice(inicio, fin + 1));
-
-      const articulo = document.createElement("article");
-      articulo.className = "card";
-      articulo.style.cursor = "pointer";
-
-      const imagen = document.createElement("img");
-      imagen.src = noticia.imagen || "";
-      imagen.alt = noticia.titulo || "";
-      imagen.style = "width:100%; height:180px; object-fit:cover;";
-
-      const miniatura = document.createElement("div");
-      miniatura.className = "thumb";
-      miniatura.appendChild(imagen);
-
-      const cuerpo = document.createElement("div");
-      cuerpo.className = "card-body";
-
-      const categoria = document.createElement("span");
-      categoria.className = "category";
-      categoria.textContent = noticia.categoria || "";
-
-      const titulo = document.createElement("h3");
-      titulo.textContent = noticia.titulo || "";
-
-      const texto = document.createElement("p");
-      texto.textContent = noticia.cuerpo || "";
-
-      const fecha = document.createElement("div");
-      fecha.className = "meta";
-      fecha.textContent = noticia.fecha || "";
-
-      cuerpo.append(categoria, titulo, texto, fecha);
-      articulo.append(miniatura, cuerpo);
-
-      articulo.addEventListener("click", () => {
-        localStorage.setItem("noticiaSeleccionada", JSON.stringify(noticia));
-        window.location.href = "noticia.html";
-      });
-
-      contenedor.appendChild(articulo);
+      noticias.push(noticia);
     }
+
+    actualidad.innerHTML = "";
+
+    Object.values(contenedores).forEach(contenedor => {
+      contenedor.innerHTML = "";
+    });
+
+    noticias.forEach(noticia => {
+      const categoria = normalizar(noticia.categoria);
+
+      actualidad.appendChild(crearTarjeta(noticia));
+
+      if (categoria === "futbol profesional") {
+        contenedores.futbol.appendChild(crearTarjeta(noticia));
+      } else if (categoria === "inferiores") {
+        contenedores.inferiores.appendChild(crearTarjeta(noticia));
+      } else if (categoria === "historia") {
+        contenedores.historia.appendChild(crearTarjeta(noticia));
+      } else if (
+        categoria !== "actualidad sabalera" &&
+        categoria !== ""
+      ) {
+        contenedores.disciplinas.appendChild(crearTarjeta(noticia));
+      }
+    });
+
   } catch (error) {
-    contenedor.textContent = "No se pudieron cargar las noticias.";
+    actualidad.textContent = "No se pudieron cargar las noticias.";
     console.error(error);
   }
- }
+}
 
 cargarNoticias();
 </script>
+
 </body>
 </html>
