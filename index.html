@@ -371,6 +371,42 @@ async function cargarNoticias() {
 }
 
 cargarNoticias();
+  const enlaces = document.querySelectorAll("nav a");
+
+const seccionesPagina = [
+  document.getElementById("inicio"),
+  document.getElementById("actualidad"),
+  document.getElementById("futbol"),
+  document.getElementById("inferiores"),
+  document.getElementById("historia"),
+  document.getElementById("disciplinas")
+];
+
+function mostrarSeccion(id) {
+  seccionesPagina.forEach(seccion => {
+    if (seccion) {
+      seccion.style.display = seccion.id === id ? "block" : "none";
+    }
+  });
+
+  enlaces.forEach(enlace => {
+    enlace.classList.toggle(
+      "active",
+      enlace.dataset.seccion === id
+    );
+  });
+
+  window.scrollTo(0, 0);
+}
+
+enlaces.forEach(enlace => {
+  enlace.addEventListener("click", evento => {
+    evento.preventDefault();
+    mostrarSeccion(enlace.dataset.seccion);
+  });
+});
+
+mostrarSeccion("inicio");
 </script>
 
 </body>
