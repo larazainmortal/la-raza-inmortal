@@ -349,6 +349,7 @@ async function cargarNoticias() {
       if (inicio === -1 || fin === -1) continue;
 
       const noticia = JSON.parse(contenido.slice(inicio, fin + 1));
+      noticia.slug = archivo.name.replace(/\.md$/, "");
       noticias.push(noticia);
     }
 
