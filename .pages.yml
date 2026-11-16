@@ -28,6 +28,9 @@ content:
       - name: imagen
         label: Fotografía
         type: image
+              - name: bajada
+        label: Bajada
+        type: text
 
       - name: fecha
         label: Fecha
