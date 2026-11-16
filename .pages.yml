@@ -12,9 +12,15 @@ content:
       - name: titulo
         label: Título
         type: string
-      - name: categoria
-        label: Categoría
-        type: string
+     - name: categoria
+  label: Categoría
+  type: select
+  options:
+    - Actualidad Sabalera
+    - Fútbol profesional
+    - Inferiores
+    - Historia
+    - Otras disciplinas
       - name: imagen
         label: Fotografía
         type: image
