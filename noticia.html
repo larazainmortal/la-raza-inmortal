@@ -274,33 +274,86 @@ footer .wrap {
 </footer>
 
 <script>
-const noticia = JSON.parse(
-  localStorage.getItem("noticiaSeleccionada") || "null"
-);
 
 const contenido = document.getElementById("contenido");
+const slug = new URLSearchParams(window.location.search).get("id");
 
-if (noticia) {
-  contenido.innerHTML = `
-    <img id="foto" alt="">
-    <div class="noticia-body">
-      <span class="category" id="categoria"></span>
-      <h2 id="titulo"></h2>
-      <div class="meta" id="fecha"></div>
-      <div class="cuerpo" id="cuerpo"></div>
-    </div>
-  `;
+async function cargarNoticia() {
+  try {
+    let noticia = null;
 
-  document.getElementById("foto").src = noticia.imagen || "";
-  document.getElementById("foto").alt = noticia.titulo || "";
-  document.getElementById("categoria").textContent = noticia.categoria || "";
-  document.getElementById("titulo").textContent = noticia.titulo || "";
-  document.getElementById("fecha").textContent = noticia.fecha || "";
-  document.getElementById("cuerpo").textContent = noticia.cuerpo || "";
-} else {
-  contenido.querySelector(".noticia-body").textContent =
-    "No se encontró la noticia. Volvé a la página principal y seleccioná una publicación.";
+    if (slug) {
+      const respuesta = await fetch(
+        "https://api.github.com/repos/larazainmortal/la-raza-inmortal/contents/content/noticias"
+      );
+
+      if (!respuesta.ok) throw new Error("No se pudieron cargar las noticias");
+
+      const archivos = await respuesta.json();
+      const archivo = archivos.find(a => a.name === `${slug}.md`);
+
+      if (!archivo) throw new Error("Noticia no encontrada");
+
+      const respuestaArchivo = await fetch(archivo.download_url);
+      const texto = await respuestaArchivo.text();
+
+      const inicio = texto.indexOf("{");
+      const fin = texto.lastIndexOf("}");
+
+      if (inicio === -1 || fin === -1) throw new Error("Formato inválido");
+
+      noticia = JSON.parse(texto.slice(inicio, fin + 1));
+    } else {
+      noticia = JSON.parse(
+        localStorage.getItem("noticiaSeleccionada") || "null"
+      );
+    }
+
+    if (!noticia) throw new Error("Noticia no encontrada");
+
+    contenido.innerHTML = `
+      <div class="noticia-body">
+        <h2 id="titulo"></h2>
+      </div>
+      <img id="foto" alt="">
+      <div class="noticia-body">
+        <p class="bajada" id="bajada"></p>
+        <div class="cuerpo" id="cuerpo"></div>
+        <div class="meta">
+          <span id="categoria"></span> · <span id="fecha"></span>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("titulo").textContent = noticia.titulo || "";
+    document.getElementById("foto").src = noticia.imagen || "";
+    document.getElementById("foto").alt = noticia.titulo || "";
+    document.getElementById("bajada").textContent = noticia.bajada || "";
+    document.getElementById("categoria").textContent = noticia.categoria || "";
+    document.getElementById("fecha").textContent = noticia.fecha || "";
+
+    const cuerpo = document.getElementById("cuerpo");
+    const parrafos = (noticia.cuerpo || "").trim().split(/\n\s*\n/);
+
+    parrafos.forEach(texto => {
+      if (!texto.trim()) return;
+      const parrafo = document.createElement("p");
+      parrafo.textContent = texto.trim();
+      cuerpo.appendChild(parrafo);
+    });
+
+  } catch (error) {
+    contenido.innerHTML = `
+      <div class="noticia-body">
+        No se encontró la noticia. Volvé a la página principal.
+      </div>
+    `;
+    console.error(error);
+  }
 }
+
+cargarNoticia();
+
 </script>
 
 </body>
