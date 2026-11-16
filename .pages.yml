@@ -1,3 +1,4 @@
+
 media:
   input: media
   output: /media
@@ -9,25 +10,30 @@ content:
     path: content/noticias
     format: json
     fields:
-  - name: titulo
-    label: Título
-    type: string
-  - name: categoria
-    label: Categoría
-    type: select
-    options:
-    values:
+      - name: titulo
+        label: Título
+        type: string
+
+      - name: categoria
+        label: Categoría
+        type: select
+        options:
+          values:
             - Actualidad Sabalera
             - Fútbol profesional
             - Inferiores
             - Historia
             - Otras disciplinas
+
       - name: imagen
         label: Fotografía
         type: image
+
       - name: fecha
         label: Fecha
         type: date
+
       - name: cuerpo
         label: Noticia
         type: text
+
