@@ -1,6 +1,6 @@
 {
   "titulo": "prueba de publicación",
-  "categoria": "Actualidad Sabalera",
+  "categoria": "Historia",
   "imagen": "/media/Captura de pantalla 2026-11-11 141953.png",
   "fecha": "2026-11-12",
   "cuerpo": "esta es una prueba del sistema de publicación de LA RAZA INMORTALncieowwowow´wne owincncincicnineicniecnicncieiwo´wecncmdcmdc isciniwcnincjndviwoij´sjnecfhirunioniovnvneivn owinoicnmioesjmoics,cmvbbire´ñsiokinmcowinmcsñljififhiwjiwjiwejeijeijiejiejeijiwjiwjje iefnwoifjijifjwiwjfiwojowjwofowfjwoejfiwdjd"
