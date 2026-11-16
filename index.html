@@ -320,10 +320,9 @@ async function cargarNoticias() {
     cuerpo.append(categoria, titulo, texto, fecha);
     articulo.append(miniatura, cuerpo);
 
-    articulo.addEventListener("click", () => {
-      localStorage.setItem("noticiaSeleccionada", JSON.stringify(noticia));
-      window.location.href = "noticia.html";
-    });
+   articulo.addEventListener("click", () => {
+  window.location.href = "noticia.html?id=" + encodeURIComponent(noticia.slug);
+});
 
     return articulo;
   }
