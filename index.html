@@ -345,22 +345,29 @@ async function cargarNoticias() {
       contenedor.innerHTML = "";
     });
 
-    noticias.forEach(noticia => {
-      const categoria = normalizar(noticia.categoria);
+  noticias.forEach(noticia => {
+  const categoria = normalizar(noticia.categoria);
 
-      actualidad.appendChild(crearTarjeta(noticia));
-if (categoria === "futbol profesional" || categoria === "futbol") {
-  contenedores.futbol.appendChild(crearTarjeta(noticia));
+  actualidad.appendChild(crearTarjeta(noticia));
 
-} else if (categoria === "inferiores") {
-  contenedores.inferiores.appendChild(crearTarjeta(noticia));
+  if (categoria === "futbol profesional" || categoria === "futbol") {
+    contenedores.futbol.appendChild(crearTarjeta(noticia));
 
-} else if (categoria === "historia") {
-  contenedores.historia.appendChild(crearTarjeta(noticia));
+  } else if (categoria === "inferiores") {
+    contenedores.inferiores.appendChild(crearTarjeta(noticia));
 
-} else if (categoria === "otras disciplinas") {
-  contenedores.disciplinas.appendChild(crearTarjeta(noticia));
-}
+  } else if (categoria === "historia") {
+    contenedores.historia.appendChild(crearTarjeta(noticia));
+
+  } else if (categoria === "otras disciplinas") {
+    contenedores.disciplinas.appendChild(crearTarjeta(noticia));
+  }
+});
+
+  } catch (error) {
+    actualidad.textContent = "No se pudieron cargar las noticias.";
+    console.error(error);
+  }
 }
 
 cargarNoticias();
