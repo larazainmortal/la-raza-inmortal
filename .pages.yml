@@ -9,18 +9,19 @@ content:
     path: content/noticias
     format: json
     fields:
-      - name: titulo
-        label: Título
-        type: string
-     - name: categoria
-  label: Categoría
-  type: select
-  options:
-    - Actualidad Sabalera
-    - Fútbol profesional
-    - Inferiores
-    - Historia
-    - Otras disciplinas
+  - name: titulo
+    label: Título
+    type: string
+  - name: categoria
+    label: Categoría
+    type: select
+    options:
+    values:
+            - Actualidad Sabalera
+            - Fútbol profesional
+            - Inferiores
+            - Historia
+            - Otras disciplinas
       - name: imagen
         label: Fotografía
         type: image
