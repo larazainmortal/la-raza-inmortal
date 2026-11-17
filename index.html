@@ -306,14 +306,15 @@ async function cargarNoticias() {
     const titulo = document.createElement("h3");
     titulo.textContent = noticia.titulo || "";
 
-    const texto = document.createElement("p");
-    texto.textContent = noticia.cuerpo || "";
+  const bajada = document.createElement("p");
+bajada.className = "bajada";
+bajada.textContent = noticia.bajada || "";
 
-    const fecha = document.createElement("div");
-    fecha.className = "meta";
-    fecha.textContent = noticia.fecha || "";
-
-    cuerpo.append(categoria, titulo, texto, fecha);
+const leer = document.createElement("span");
+leer.className = "leer-noticia";
+leer.textContent = "Leer noticia →";
+    
+  cuerpo.append(categoria, titulo, bajada, leer);
     articulo.append(miniatura, cuerpo);
 
    articulo.addEventListener("click", () => {
