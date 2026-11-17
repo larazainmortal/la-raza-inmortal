@@ -347,10 +347,21 @@ async function cargarNoticia() {
 
     parrafos.forEach(texto => {
       if (!texto.trim()) return;
-      const parrafo = document.createElement("p");
-      parrafo.textContent = texto.trim();
-      cuerpo.appendChild(parrafo);
-    });
+     const parrafo = document.createElement("p");
+
+const partes = texto.trim().split(/\*\*(.*?)\*\*/g);
+
+partes.forEach((parte, indice) => {
+  if (indice % 2 === 1) {
+    const negrita = document.createElement("strong");
+    negrita.textContent = parte;
+    parrafo.appendChild(negrita);
+  } else {
+    parrafo.appendChild(document.createTextNode(parte));
+  }
+});
+
+cuerpo.appendChild(parrafo);
 
   } catch (error) {
     contenido.innerHTML = `
