@@ -369,7 +369,20 @@ async function cargarNoticia() {
     document.getElementById("bajada").textContent = noticia.bajada || "";
     document.getElementById("categoria").textContent = noticia.categoria || "";
     document.getElementById("fecha").textContent = noticia.fecha || "";
+document.getElementById("whatsapp").addEventListener("click", () => {
+  const url = window.location.href;
+  const titulo = document.getElementById("titulo").textContent;
 
+  window.open(
+    "https://wa.me/?text=" + encodeURIComponent(titulo + " " + url),
+    "_blank"
+  );
+});
+
+document.getElementById("copiar").addEventListener("click", async () => {
+  await navigator.clipboard.writeText(window.location.href);
+  document.getElementById("copiar").textContent = "¡Enlace copiado!";
+});
     const cuerpo = document.getElementById("cuerpo");
   const parrafos = (noticia.cuerpo || "").trim().split(/\n+/);
 
@@ -400,20 +413,7 @@ async function cargarNoticia() {
     console.error(error);
   }
 }
-document.getElementById("whatsapp").addEventListener("click", () => {
-  const url = window.location.href;
-  const titulo = document.getElementById("titulo").textContent;
 
-  window.open(
-    "https://wa.me/?text=" + encodeURIComponent(titulo + " " + url),
-    "_blank"
-  );
-});
-
-document.getElementById("copiar").addEventListener("click", async () => {
-  await navigator.clipboard.writeText(window.location.href);
-  document.getElementById("copiar").textContent = "¡Enlace copiado!";
-});
 cargarNoticia();
 
 </script>
