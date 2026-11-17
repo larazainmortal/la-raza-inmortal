@@ -329,10 +329,14 @@ async function cargarNoticia() {
       <div class="noticia-body">
         <p class="bajada" id="bajada"></p>
         <div class="cuerpo" id="cuerpo"></div>
-        <div class="meta">
-          <span id="categoria"></span> · <span id="fecha"></span>
-        </div>
-      </div>
+      <div class="meta">
+  <span id="categoria"></span> · <span id="fecha"></span>
+</div>
+
+<div class="compartir">
+  <button id="whatsapp">Compartir por WhatsApp</button>
+  <button id="copiar">Copiar enlace</button>
+</div>
     `;
 
     document.getElementById("titulo").textContent = noticia.titulo || "";
