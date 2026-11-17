@@ -345,24 +345,24 @@ async function cargarNoticia() {
     const cuerpo = document.getElementById("cuerpo");
   const parrafos = (noticia.cuerpo || "").trim().split(/\n+/);
 
-    parrafos.forEach(texto => {
-      if (!texto.trim()) return;
-     const parrafo = document.createElement("p");
+   parrafos.forEach(texto => {
+  if (!texto.trim()) return;
 
-const partes = texto.trim().split(/\*\*(.*?)\*\*/g);
+  const parrafo = document.createElement("p");
+  const partes = texto.trim().split(/\*\*(.*?)\*\*/g);
 
-partes.forEach((parte, indice) => {
-  if (indice % 2 === 1) {
-    const negrita = document.createElement("strong");
-    negrita.textContent = parte;
-    parrafo.appendChild(negrita);
-  } else {
-    parrafo.appendChild(document.createTextNode(parte));
-  }
+  partes.forEach((parte, indice) => {
+    if (indice % 2 === 1) {
+      const negrita = document.createElement("strong");
+      negrita.textContent = parte;
+      parrafo.appendChild(negrita);
+    } else {
+      parrafo.appendChild(document.createTextNode(parte));
+    }
+  });
+
+  cuerpo.appendChild(parrafo);
 });
-
-cuerpo.appendChild(parrafo);
-
   } catch (error) {
     contenido.innerHTML = `
       <div class="noticia-body">
