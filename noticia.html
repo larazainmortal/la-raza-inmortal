@@ -343,7 +343,7 @@ async function cargarNoticia() {
     document.getElementById("fecha").textContent = noticia.fecha || "";
 
     const cuerpo = document.getElementById("cuerpo");
-    const parrafos = (noticia.cuerpo || "").trim().split(/\n\s*\n/);
+  const parrafos = (noticia.cuerpo || "").trim().split(/\n+/);
 
     parrafos.forEach(texto => {
       if (!texto.trim()) return;
