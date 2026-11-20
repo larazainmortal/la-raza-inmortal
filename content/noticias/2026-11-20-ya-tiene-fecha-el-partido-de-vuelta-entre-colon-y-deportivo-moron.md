@@ -1,0 +1,8 @@
+{
+  "titulo": "Ya tiene fecha el partido de vuelta entre Colón y Deportivo Morón",
+  "categoria": "Fútbol profesional",
+  "imagen": "/media/m111905_crop169014_1024x576_proportional_16759938968C49.jpg",
+  "bajada": "La AFA confirmó que el encuentro de vuelta por los cuartos de final del Reducido se disputará el viernes 27 de noviembre a las 21, en el estadio Nuevo Francisco Urbano. El partido se adelantó un día respecto de la programación inicial ",
+  "fecha": "2026-11-20",
+  "cuerpo": "En el día de hoy, la AFA confirmó la fecha definitiva para disputar el partido de vuelta de los cuartos de final entre Colón y Deportivo Morón. El encuentro tendrá lugar el viernes 27 de noviembre a las 21:00, en el estadio Nuevo Francisco Urbano.\n\nInicialmente, el partido estaba previsto para el sábado 28 de noviembre, pero finalmente se decidió adelantarlo 24 horas.\n\nLa modificación está relacionada con el cronograma del Reducido, ya que las semifinales tienen previsto comenzar entre semana, más precisamente el 1 o 2 de diciembre.\n\nAdemás, ese mismo sábado 28 se disputará la final de la Copa Libertadores entre Estudiantes y Palmeiras, otro de los motivos que influyeron en la reorganización del calendario.\n\nPor su parte, este sábado desde las 17:30, el Sabalero recibirá al Gallito en el estadio Brigadier López para disputar el encuentro de ida. Luego, buscará definir la serie en condición de visitante, en el Nuevo Francisco Urbano."
+}
